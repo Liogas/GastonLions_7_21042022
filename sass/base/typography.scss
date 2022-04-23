@@ -1,0 +1,14 @@
+html, body {
+    font-size: $fontSize;
+}
+body { 
+    font-family: $fontFamily;
+    h1 {
+        font-size: 2rem;
+    }
+}
+header {
+    h1 {
+        font-family: $fontFamilyLogo;
+    }
+}
