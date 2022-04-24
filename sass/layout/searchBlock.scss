@@ -1,0 +1,33 @@
+
+div#search_block {
+
+    div#main_search_block {
+
+        width: 100%;
+        background-color: $gray300;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 17.5px 16.43px 19.43px 24px;
+        border-radius: 5px;
+        margin-top: 17px;
+
+        input {
+            background: none;
+            border: none;
+            outline: none;
+            font-size: $fontSize;
+            width: 100%;
+            font-weight: 400;
+            opacity: 0.25;
+            line-height: 22px;
+        }
+
+        img {
+            width: 32.06px;
+            height: 32.06px;
+        }
+    }
+
+
+}
