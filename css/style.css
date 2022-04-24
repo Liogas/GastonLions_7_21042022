@@ -54,7 +54,7 @@ html, body {
 }
 
 body {
-  font-family: "Lato";
+  font-family: "Lato", sans-serif;
 }
 body h1 {
   font-size: 2rem;
@@ -100,6 +100,102 @@ div#search_block div#main_search_block input {
 div#search_block div#main_search_block img {
   width: 32.06px;
   height: 32.06px;
+}
+div#search_block div#tag_block {
+  width: 100%;
+  margin-top: 25px;
+  display: flex;
+  align-items: center;
+}
+div#search_block div#tag_block .tag {
+  color: white;
+  border-radius: 5px;
+  display: flex;
+  padding: 10px 22px 9px 20px;
+  margin-right: 20px;
+}
+div#search_block div#tag_block .tag p {
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 17px;
+}
+div#search_block div#tag_block .tag img {
+  margin-left: 13px;
+  width: 20px;
+  height: 20px;
+}
+div#search_block div#tag_block .tag_device {
+  background-color: #68D9A4;
+}
+div#search_block div#tag_block .tag_ingredient {
+  background-color: #3282F7;
+}
+div#search_block div#tag_block .tag_ustensil {
+  background-color: #ED6454;
+}
+div#search_block div#advanced-search-block {
+  width: 100%;
+  display: flex;
+  margin-top: 15px;
+}
+div#search_block div#advanced-search-block .advanced_block {
+  margin-right: 20px;
+  border-radius: 5px;
+  color: white;
+}
+div#search_block div#advanced-search-block .advanced_block#ingredients_block {
+  background-color: #3282F7;
+}
+div#search_block div#advanced-search-block .advanced_block#devices_block {
+  background-color: #68D9A4;
+}
+div#search_block div#advanced-search-block .advanced_block#ustensils_block {
+  background-color: #ED6454;
+}
+div#search_block div#advanced-search-block .advanced_block span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+div#search_block div#advanced-search-block .advanced_block input {
+  width: 100%;
+  background: none;
+  outline: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+}
+div#search_block div#advanced-search-block .advanced_block img {
+  width: 16px;
+  height: 9.88px;
+}
+div#search_block div#advanced-search-block .advanced_block.close {
+  max-width: 170px;
+  max-height: 69px;
+  padding: 23px 29.67px 24px 22px;
+}
+div#search_block div#advanced-search-block .advanced_block.close .suggestions_block {
+  display: none;
+}
+div#search_block div#advanced-search-block .advanced_block.open_all {
+  width: 667px;
+  padding: 22px 28px 16px 19px;
+}
+div#search_block div#advanced-search-block .advanced_block.open_all .suggestions_block {
+  margin-top: 27px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 108px;
+  row-gap: 10px;
+}
+div#search_block div#advanced-search-block .advanced_block.open_user_entry {
+  padding: 25px 24px 16px 19px;
+  height: min-content;
+}
+div#search_block div#advanced-search-block .advanced_block.open_user_entry .suggestions_block {
+  margin-top: 12px;
+  margin-left: 1px;
 }
 
 body {

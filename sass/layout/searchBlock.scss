@@ -1,8 +1,6 @@
 
 div#search_block {
-
     div#main_search_block {
-
         width: 100%;
         background-color: $gray300;
         display: flex;
@@ -11,7 +9,6 @@ div#search_block {
         padding: 17.5px 16.43px 19.43px 24px;
         border-radius: 5px;
         margin-top: 17px;
-
         input {
             background: none;
             border: none;
@@ -22,12 +19,107 @@ div#search_block {
             opacity: 0.25;
             line-height: 22px;
         }
-
         img {
             width: 32.06px;
             height: 32.06px;
         }
     }
 
+    div#tag_block {
+        width: 100%;
+        margin-top: 25px;
+        display: flex;
+        align-items: center;
+        .tag {
+            color: white;
+            border-radius: 5px;
+            display: flex;
+            padding: 10px 22px 9px 20px;
+            margin-right: 20px;
+            p {
+                font-size: 0.8rem;
+                font-weight: 700;
+                line-height: 17px;
+            }
+            img {
+                margin-left: 13px;
+                width: 20px;
+                height: 20px;
+            }
+        }
+        .tag_device {
+            background-color: $green;
+        }
+        .tag_ingredient {
+            background-color: $blue;
+        }
+        .tag_ustensil {
+            background-color: $orange;
+        }
+    }
 
+    div#advanced-search-block {
+        width: 100%;
+        display: flex;
+        margin-top: 15px;
+        .advanced_block {
+            margin-right: 20px;
+            border-radius : 5px;
+            color : white;
+            &#ingredients_block {
+                background-color: $blue;
+            }
+            &#devices_block {
+                background-color: $green;
+            }
+            &#ustensils_block {
+                background-color: $orange;
+            }
+            span {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            input {
+                width: 100%;
+                background: none;
+                outline: none;
+                border: none;
+                color: white;
+                font-size: 1rem;
+                font-weight: 700;
+            }
+            img {
+                width: 16px;
+                height: 9.88px;
+            }
+        }
+        .advanced_block.close{
+            max-width: 170px;
+            max-height: 69px;
+            padding: 23px 29.67px 24px 22px;
+            .suggestions_block {
+                display: none;
+            }
+        }
+        .advanced_block.open_all {
+            width: 667px;
+            padding: 22px 28px 16px 19px;
+            .suggestions_block {
+                margin-top: 27px;
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                column-gap: 108px;
+                row-gap: 10px;
+            }
+        }
+        .advanced_block.open_user_entry {
+            padding: 25px 24px 16px 19px;
+            height: min-content;
+            .suggestions_block {
+                margin-top: 12px;
+                margin-left: 1px;
+            }
+        }
+    }
 }

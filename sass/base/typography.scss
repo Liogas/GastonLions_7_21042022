@@ -2,7 +2,7 @@ html, body {
     font-size: $fontSize;
 }
 body { 
-    font-family: $fontFamily;
+    font-family: $fontFamily, sans-serif;
     h1 {
         font-size: 2rem;
     }

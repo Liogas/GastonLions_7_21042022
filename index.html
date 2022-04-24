@@ -7,6 +7,9 @@
     <link href="./css/style.css" rel="stylesheet" type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/c1abb48736.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet"> 
     <title>Projet 7</title>
 </head>
 <body>
@@ -20,37 +23,61 @@
                 <input type="search" placeholder="Rechercher une recette" name="" id="main_search_bar">
                 <img src="./img/search.png" alt="search">
             </div>
-        </div>
-        <!--<div id="tag_block">
-            <div class="tag">
-                <p>Coco</p>
-                <img src="./img/cross.png" alt="delete">
-            </div>
-        </div>
-        <div id="advanced-search-block">
-            <div class="advanced-block">
-                <input type="search" name="" class="advanced-searchBar"  id="ingredients-searchBar">
-                <img src="./img/arrowDown.png" alt="arrow down">
-                <div class="suggestions_block" id="ingredients-suggestions">
-                    <p class="suggestions">Coco</p>
+            <div id="tag_block">
+                <div class="tag tag_ingredient">
+                    <p>Jus de citron</p>
+                    <img src="./img/cross.png" alt="delete">
+                </div>
+                <div class="tag tag_device">
+                    <p>Four</p>
+                    <img src="./img/cross.png" alt="delete">
+                </div>
+                <div class="tag tag_ustensil">
+                    <p>Fouet</p>
+                    <img src="./img/cross.png" alt="delete">
                 </div>
             </div>
-            <div class="advanced-block">
-                <input type="search" name="" class="advanced-searchBar"  id="devices-searchBar">
-                <img src="./img/arrowDown.png" alt="arrow down">
-                <div class="suggestions_block" id="devices-suggestions">
-                    <p class="suggestions">Coco</p>
+            <div id="advanced-search-block">
+                <div class="advanced_block open_all" id="ingredients_block">
+                    <span>
+                        <input type="search" placeholder="Ingredients" name="" class="advanced_searchBar"  id="ingredients_searchBar">
+                        <img src="./img/arrowDown.png" alt="arrow down">
+                    </span>
+                    <ul class="suggestions_block" id="ingredients_suggestions">
+                        <li class="suggestion">Lait de coco</li>
+                        <li class="suggestion">Jus de citron</li>
+                        <li class="suggestion">Crème de coco</li>
+                        <li class="suggestion">Sucre</li>
+                        <li class="suggestion">Glaçons</li>
+                        <li class="suggestion">Thon rouge</li>
+                        <li class="suggestion">Concombre</li>
+                        <li class="suggestion">Tomate</li>
+                        <li class="suggestion">Carotte</li>
+                        <li class="suggestion">Citron Vert</li>
+                        <li class="suggestion">Poulet</li>
+                        <li class="suggestion">Coulis de tomate</li>
+                    </ul>
                 </div>
-            </div>
-            <div class="advanced-block">
-                <input type="search" name="" class="advanced-searchBar"  id="utensils-searchBar">
-                <img src="./img/arrowDown.png" alt="arrow down">
-                <div class="suggestions_block" id="utensils-suggestions">
-                    <p class="suggestions">Coco</p>
+                <div class="advanced_block open_user_entry" id="devices_block">
+                    <span>
+                        <input type="search" placeholder="Appareils" name="" class="advanced_searchBar"  id="devices_searchBar">
+                        <img src="./img/arrowDown.png" alt="arrow down">
+                    </span>
+                    <ul class="suggestions_block" id="devices_suggestions">
+                        <li class="suggestion">Coco</li>
+                    </ul>
+                </div>
+                <div class="advanced_block close" id="ustensils_block">
+                    <span>
+                        <input type="search" placeholder="Ustensiles" name="" class="advanced_searchBar"  id="utensils_searchBar">
+                        <img src="./img/arrowDown.png" alt="arrow down">
+                    </span>
+                    <ul class="suggestions_block" id="utensils_suggestions">
+                    </ul>
                 </div>
             </div>
         </div>
-        <div id="result_block">
+         <!--<div id="result_block">
             <div class="recipe">
                 <div class="recipe-head"></div>
                 <h1>Limonade de coco</h1>
