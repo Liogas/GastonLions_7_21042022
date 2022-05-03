@@ -1876,9 +1876,9 @@ btnOpenAppliancesSuggestion.addEventListener('click', function() {
 btnOpenUstensilsSuggestion.addEventListener('click', function() {
     if(btnOpenUstensilsSuggestion.parentElement.firstElementChild.value != '') {
         const suggestions = filterSuggestion(advancedUstensils, btnOpenUstensilsSuggestion.parentElement.firstElementChild.value);
-        openSuggestionsWithEntry(btnOpenUstensilsSuggestion.parentElement.parentElement, suggestionUstensilsDOM, suggestions, 'ustensils');
+        openSuggestionsWithEntry(btnOpenUstensilsSuggestion.parentElement.parentElement, suggestionUstensilsDOM, suggestions, 'ustensil');
     } else {
-        openSuggestions(btnOpenUstensilsSuggestion.parentElement.parentElement, suggestionUstensilsDOM, advancedUstensils, 'ustensils');
+        openSuggestions(btnOpenUstensilsSuggestion.parentElement.parentElement, suggestionUstensilsDOM, advancedUstensils, 'ustensil');
     }
 });
 
