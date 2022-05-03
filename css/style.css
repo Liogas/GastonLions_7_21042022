@@ -83,7 +83,7 @@ div#search_block div#main_search_block {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 17.5px 16.43px 19.43px 24px;
+  padding: 17px 16px 19px 24px;
   border-radius: 5px;
   margin-top: 17px;
 }
@@ -97,30 +97,43 @@ div#search_block div#main_search_block input {
   opacity: 0.25;
   line-height: 22px;
 }
-div#search_block div#main_search_block img {
-  width: 32.06px;
-  height: 32.06px;
+div#search_block div#main_search_block button {
+  border: none;
+}
+div#search_block div#main_search_block button:hover {
+  cursor: pointer;
+  background: none;
+}
+div#search_block div#main_search_block button img {
+  width: 32px;
+  height: 32px;
 }
 div#search_block div#tag_block {
   width: 100%;
   margin-top: 25px;
   display: flex;
-  align-items: center;
 }
 div#search_block div#tag_block .tag {
   color: white;
   border-radius: 5px;
   display: flex;
+  align-items: center;
   padding: 10px 22px 9px 20px;
   margin-right: 20px;
 }
 div#search_block div#tag_block .tag p {
   font-size: 0.8rem;
   font-weight: 700;
-  line-height: 17px;
 }
-div#search_block div#tag_block .tag img {
+div#search_block div#tag_block .tag button {
   margin-left: 13px;
+  background: none;
+  border: none;
+}
+div#search_block div#tag_block .tag button:hover {
+  cursor: pointer;
+}
+div#search_block div#tag_block .tag button img {
   width: 20px;
   height: 20px;
 }
@@ -133,31 +146,31 @@ div#search_block div#tag_block .tag_ingredient {
 div#search_block div#tag_block .tag_ustensil {
   background-color: #ED6454;
 }
-div#search_block div#advanced-search-block {
+div#search_block div#advanced_search_block {
   width: 100%;
   display: flex;
   margin-top: 15px;
 }
-div#search_block div#advanced-search-block .advanced_block {
+div#search_block div#advanced_search_block .advanced_block {
   margin-right: 20px;
   border-radius: 5px;
   color: white;
 }
-div#search_block div#advanced-search-block .advanced_block#ingredients_block {
+div#search_block div#advanced_search_block .advanced_block#ingredients_block {
   background-color: #3282F7;
 }
-div#search_block div#advanced-search-block .advanced_block#devices_block {
+div#search_block div#advanced_search_block .advanced_block#devices_block {
   background-color: #68D9A4;
 }
-div#search_block div#advanced-search-block .advanced_block#ustensils_block {
+div#search_block div#advanced_search_block .advanced_block#ustensils_block {
   background-color: #ED6454;
 }
-div#search_block div#advanced-search-block .advanced_block span {
+div#search_block div#advanced_search_block .advanced_block span {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-div#search_block div#advanced-search-block .advanced_block input {
+div#search_block div#advanced_search_block .advanced_block input {
   width: 100%;
   background: none;
   outline: none;
@@ -166,34 +179,64 @@ div#search_block div#advanced-search-block .advanced_block input {
   font-size: 1rem;
   font-weight: 700;
 }
-div#search_block div#advanced-search-block .advanced_block img {
+div#search_block div#advanced_search_block .advanced_block input::placeholder {
+  opacity: 1;
+}
+div#search_block div#advanced_search_block .advanced_block input:focus::placeholder {
+  opacity: 0.5;
+}
+div#search_block div#advanced_search_block .advanced_block button {
+  border: none;
+  background: none;
+  color: white;
+  font-size: 18px;
+}
+div#search_block div#advanced_search_block .advanced_block button:hover {
+  cursor: pointer;
+}
+div#search_block div#advanced_search_block .advanced_block button img {
   width: 16px;
-  height: 9.88px;
+  height: 10px;
 }
-div#search_block div#advanced-search-block .advanced_block.close {
-  max-width: 170px;
-  max-height: 69px;
-  padding: 23px 29.67px 24px 22px;
+div#search_block div#advanced_search_block .advanced_block.close {
+  width: 170px;
+  height: 69px;
+  padding: 23px 18px 24px 19px;
 }
-div#search_block div#advanced-search-block .advanced_block.close .suggestions_block {
+div#search_block div#advanced_search_block .advanced_block.close .close_suggestions {
   display: none;
 }
-div#search_block div#advanced-search-block .advanced_block.open_all {
-  width: 667px;
+div#search_block div#advanced_search_block .advanced_block.close .open_suggestions {
+  display: block;
+}
+div#search_block div#advanced_search_block .advanced_block.close .suggestions_block {
+  display: none;
+}
+div#search_block div#advanced_search_block .advanced_block.open_all {
+  max-width: 70%;
   padding: 22px 28px 16px 19px;
 }
-div#search_block div#advanced-search-block .advanced_block.open_all .suggestions_block {
+div#search_block div#advanced_search_block .advanced_block.open_all .open_suggestions {
+  display: none;
+}
+div#search_block div#advanced_search_block .advanced_block.open_all .close_suggestions {
+  display: block;
+}
+div#search_block div#advanced_search_block .advanced_block.open_all .suggestions_block {
   margin-top: 27px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 108px;
   row-gap: 10px;
 }
-div#search_block div#advanced-search-block .advanced_block.open_user_entry {
+div#search_block div#advanced_search_block .advanced_block.open_all .suggestions_block .suggestion button {
+  text-align: left;
+}
+div#search_block div#advanced_search_block .advanced_block.open_user_entry {
   padding: 25px 24px 16px 19px;
   height: min-content;
 }
-div#search_block div#advanced-search-block .advanced_block.open_user_entry .suggestions_block {
+div#search_block div#advanced_search_block .advanced_block.open_user_entry .suggestions_block {
   margin-top: 12px;
   margin-left: 1px;
 }
@@ -215,7 +258,7 @@ div#search_block div#advanced-search-block .advanced_block.open_user_entry .sugg
 .recipe:nth-child(3n+2) {
   justify-self: center;
 }
-.recipe .recipe_head {
+.recipe .recipe_image {
   width: 100%;
   height: 178px;
   background-color: #C7BEBE;
