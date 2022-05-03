@@ -137,7 +137,7 @@ div#search_block div#tag_block .tag button img {
   width: 20px;
   height: 20px;
 }
-div#search_block div#tag_block .tag_device {
+div#search_block div#tag_block .tag_appliance {
   background-color: #68D9A4;
 }
 div#search_block div#tag_block .tag_ingredient {
@@ -159,7 +159,7 @@ div#search_block div#advanced_search_block .advanced_block {
 div#search_block div#advanced_search_block .advanced_block#ingredients_block {
   background-color: #3282F7;
 }
-div#search_block div#advanced_search_block .advanced_block#devices_block {
+div#search_block div#advanced_search_block .advanced_block#appliances_block {
   background-color: #68D9A4;
 }
 div#search_block div#advanced_search_block .advanced_block#ustensils_block {

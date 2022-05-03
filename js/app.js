@@ -1726,6 +1726,50 @@ const recipes = [
         "ustensils":["rouleau à patisserie","fouet"]
     }
 ]
+
+/* DOM CONTENT */ 
+const mainSearchBar = document.getElementById('main_search_bar');
+const tagBlock = document.getElementById('tag_block');
+const resultBlock = document.getElementById('result_block');
+
+// DOM Elements for ingredient suggestions
+const suggestionIngredientsDOM = document.getElementById('ingredients_suggestions');
+const btnOpenIngredientSuggestion = document.getElementById('open_ingredients_suggestions');
+const btnCloseIngredientSuggestion = document.getElementById('close_ingredients_suggestions');
+
+// DOM Elements for appliances suggestions
+const suggestionAppliancesDOM = document.getElementById('appliances_suggestions');
+const btnOpenAppliancesSuggestion = document.getElementById('open_appliances_suggestions');
+const btnCloseAppliancesSuggestion = document.getElementById('close_appliances_suggestions');
+
+// DOM Elements for ustensils suggestions
+const suggestionUstensilsDOM = document.getElementById('ustensils_suggestions');
+const btnOpenUstensilsSuggestion = document.getElementById('open_ustensils_suggestions');
+const btnCloseUstensilsSuggestion = document.getElementById('close_ustensils_suggestions');
+
+// Variables pour le stockage des tags
+let tags = [];
+
+
+function removeTag(tagDOM, value) {
+    tagBlock.removeChild(tagDOM);
+    tags.splice(tags.indexOf(value), 1);
+    console.log(tags);
+}
+function addTag(value, type) {
+    const valueTag = {value, type};
+    tags.push(valueTag);
+    const {getTagDOM} = searchFactory();
+    const tag = getTagDOM(valueTag);
+    tag.childNodes[1].firstElementChild.addEventListener('click', function() {
+        removeTag(tag, valueTag);
+    });
+    tag.addEventListener('click', function(e) {
+
+    })
+    tagBlock.appendChild(tag);
+}
+
 // Affiche les recettes
 function displayCardRecipe(contentDOM, dataRecipes) {
     const  { getCardRecipe } = recipeFactory();
@@ -1734,10 +1778,14 @@ function displayCardRecipe(contentDOM, dataRecipes) {
     });
 }
 // Affiche les suggestions
-function displaySuggestions(contentDOM, data) {
-    const {getAllSuggestions} = searchFactory();
+function displaySuggestions(contentDOM, data, type) {
+    const {getSuggestionDOM} = searchFactory();
     data.forEach((value) => {
-        contentDOM.appendChild(getAllSuggestions(value));
+        const suggestion = getSuggestionDOM(value);
+        suggestion.firstElementChild.addEventListener('click', function(e) {
+            addTag(e.target.value, type);
+        })
+        contentDOM.appendChild(suggestion);
     });
 }
 // Récupère les valeurs pour les suggestions des différents champs de recherche avancés en évitant les doublons
@@ -1768,36 +1816,18 @@ function getValueForAdvancedSearch(dataRecipe) {
 }
 
 // Function open suggestions
-function openSuggestions(parentElement, contentDOM, data) {
+function openSuggestions(parentElement, contentDOM, data, type) {
     parentElement.className = 'advanced_block open_all';
-    displaySuggestions(contentDOM, data);
+    displaySuggestions(contentDOM, data, type);
 }
-
 // function close suggestions
 function closeSuggestions(parentElement, contentDOM) {
     parentElement.className = 'advanced_block close';
     contentDOM.innerHTML = '';
 }
 
-/* DOM CONTENT */ 
-const mainSearchBar = document.getElementById('main_search_bar');
-const tagBlock = document.getElementById('tag_block');
-const resultBlock = document.getElementById('result_block');
 
-// DOM Elements for ingredient suggestions
-const suggestionIngredientsDOM = document.getElementById('ingredients_suggestions');
-const btnOpenIngredientSuggestion = document.getElementById('open_ingredients_suggestions');
-const btnCloseIngredientSuggestion = document.getElementById('close_ingredients_suggestions');
 
-// DOM Elements for appliances suggestions
-const suggestionAppliancesDOM = document.getElementById('devices_suggestions');
-const btnOpenAppliancesSuggestion = document.getElementById('open_devices_suggestions');
-const btnCloseAppliancesSuggestion = document.getElementById('close_devices_suggestions');
-
-// DOM Elements for ustensils suggestions
-const suggestionUstensilsDOM = document.getElementById('ustensils_suggestions');
-const btnOpenUstensilsSuggestion = document.getElementById('open_ustensils_suggestions');
-const btnCloseUstensilsSuggestion = document.getElementById('close_ustensils_suggestions');
 
 /* Afficher recette */
 displayCardRecipe(resultBlock, recipes);
@@ -1810,13 +1840,13 @@ const advancedUstensils = valueAdvancedSearch[2];
 
 /* gestion evenement btn pour ouvrir les suggestions */
 btnOpenIngredientSuggestion.addEventListener('click', function() {
-    openSuggestions(btnOpenIngredientSuggestion.parentElement.parentElement, suggestionIngredientsDOM, advancedIngredients);
+    openSuggestions(btnOpenIngredientSuggestion.parentElement.parentElement, suggestionIngredientsDOM, advancedIngredients, 'ingredient');
 });
 btnOpenAppliancesSuggestion.addEventListener('click', function() {
-    openSuggestions(btnOpenAppliancesSuggestion.parentElement.parentElement, suggestionAppliancesDOM, advancedAppliances);
+    openSuggestions(btnOpenAppliancesSuggestion.parentElement.parentElement, suggestionAppliancesDOM, advancedAppliances, 'appliance');
 });
 btnOpenUstensilsSuggestion.addEventListener('click', function() {
-    openSuggestions(btnOpenUstensilsSuggestion.parentElement.parentElement, suggestionUstensilsDOM, advancedUstensils);
+    openSuggestions(btnOpenUstensilsSuggestion.parentElement.parentElement, suggestionUstensilsDOM, advancedUstensils, 'ustensil');
 });
 
 /* gestion evenement btn pour fermer les suggestions */
