@@ -1736,25 +1736,26 @@ const resultBlock = document.getElementById('result_block');
 const suggestionIngredientsDOM = document.getElementById('ingredients_suggestions');
 const btnOpenIngredientSuggestion = document.getElementById('open_ingredients_suggestions');
 const btnCloseIngredientSuggestion = document.getElementById('close_ingredients_suggestions');
+const ingredientSearchBarDOM = document.getElementById('ingredients_searchBar');
 
 // DOM Elements for appliances suggestions
 const suggestionAppliancesDOM = document.getElementById('appliances_suggestions');
 const btnOpenAppliancesSuggestion = document.getElementById('open_appliances_suggestions');
 const btnCloseAppliancesSuggestion = document.getElementById('close_appliances_suggestions');
+const applianceSearchBarDOM = document.getElementById('appliances_searchBar');
 
 // DOM Elements for ustensils suggestions
 const suggestionUstensilsDOM = document.getElementById('ustensils_suggestions');
 const btnOpenUstensilsSuggestion = document.getElementById('open_ustensils_suggestions');
 const btnCloseUstensilsSuggestion = document.getElementById('close_ustensils_suggestions');
+const ustensilSearchBarDOM = document.getElementById('ustensils_searchBar');
 
 // Variables pour le stockage des tags
 let tags = [];
 
-
 function removeTag(tagDOM, value) {
     tagBlock.removeChild(tagDOM);
     tags.splice(tags.indexOf(value), 1);
-    console.log(tags);
 }
 function addTag(value, type) {
     const valueTag = {value, type};
@@ -1764,9 +1765,6 @@ function addTag(value, type) {
     tag.childNodes[1].firstElementChild.addEventListener('click', function() {
         removeTag(tag, valueTag);
     });
-    tag.addEventListener('click', function(e) {
-
-    })
     tagBlock.appendChild(tag);
 }
 
@@ -1820,14 +1818,16 @@ function openSuggestions(parentElement, contentDOM, data, type) {
     parentElement.className = 'advanced_block open_all';
     displaySuggestions(contentDOM, data, type);
 }
+function openSuggestionsWithEntry(parentElement, contentDOM, data, type) {
+    parentElement.className = 'advanced_block open_user_entry';
+    contentDOM.innerHTML = '';
+    displaySuggestions(contentDOM, data, type);
+}
 // function close suggestions
 function closeSuggestions(parentElement, contentDOM) {
     parentElement.className = 'advanced_block close';
     contentDOM.innerHTML = '';
 }
-
-
-
 
 /* Afficher recette */
 displayCardRecipe(resultBlock, recipes);
@@ -1838,18 +1838,51 @@ const advancedIngredients = valueAdvancedSearch[0];
 const advancedAppliances = valueAdvancedSearch[1];
 const advancedUstensils = valueAdvancedSearch[2];
 
-/* gestion evenement btn pour ouvrir les suggestions */
-btnOpenIngredientSuggestion.addEventListener('click', function() {
-    openSuggestions(btnOpenIngredientSuggestion.parentElement.parentElement, suggestionIngredientsDOM, advancedIngredients, 'ingredient');
+function filterSuggestion(suggestions, value) {
+    return suggestions.filter(suggestion => suggestion.toLowerCase().includes(value.toLowerCase()));
+}
+
+// Gestion evenement pour les barres de recherches avancés
+ingredientSearchBarDOM.addEventListener('input', function(e){
+    const suggestions = filterSuggestion(advancedIngredients, e.target.value);
+    openSuggestionsWithEntry(ingredientSearchBarDOM.parentElement.parentElement, suggestionIngredientsDOM, suggestions, 'ingredient');
 });
-btnOpenAppliancesSuggestion.addEventListener('click', function() {
-    openSuggestions(btnOpenAppliancesSuggestion.parentElement.parentElement, suggestionAppliancesDOM, advancedAppliances, 'appliance');
+applianceSearchBarDOM.addEventListener('input', function(e){
+    const suggestions = filterSuggestion(advancedAppliances, e.target.value);
+    openSuggestionsWithEntry(applianceSearchBarDOM.parentElement.parentElement, suggestionAppliancesDOM, suggestions, 'appliance');
 });
-btnOpenUstensilsSuggestion.addEventListener('click', function() {
-    openSuggestions(btnOpenUstensilsSuggestion.parentElement.parentElement, suggestionUstensilsDOM, advancedUstensils, 'ustensil');
+ustensilSearchBarDOM.addEventListener('input', function(e){
+    const suggestions = filterSuggestion(advancedUstensils, e.target.value);
+    openSuggestionsWithEntry(ustensilSearchBarDOM.parentElement.parentElement, suggestionUstensilsDOM, suggestions, 'ustensil');
 });
 
-/* gestion evenement btn pour fermer les suggestions */
+// Gestion evenement btn pour ouvrir les suggestions
+btnOpenIngredientSuggestion.addEventListener('click', function() {
+    if(btnOpenIngredientSuggestion.parentElement.firstElementChild.value != '') {
+        const suggestions = filterSuggestion(advancedIngredients, btnOpenIngredientSuggestion.parentElement.firstElementChild.value);
+        openSuggestionsWithEntry(btnOpenIngredientSuggestion.parentElement.parentElement, suggestionIngredientsDOM, suggestions, 'ingredient');
+    } else {
+        openSuggestions(btnOpenIngredientSuggestion.parentElement.parentElement, suggestionIngredientsDOM, advancedIngredients, 'ingredient');
+    }
+});
+btnOpenAppliancesSuggestion.addEventListener('click', function() {
+    if(btnOpenAppliancesSuggestion.parentElement.firstElementChild.value != '') {
+        const suggestions = filterSuggestion(advancedAppliances, btnOpenAppliancesSuggestion.parentElement.firstElementChild.value);
+        openSuggestionsWithEntry(btnOpenAppliancesSuggestion.parentElement.parentElement, suggestionAppliancesDOM, suggestions, 'appliance');
+    } else {
+        openSuggestions(btnOpenAppliancesSuggestion.parentElement.parentElement, suggestionAppliancesDOM, advancedAppliances, 'appliance');
+    }
+});
+btnOpenUstensilsSuggestion.addEventListener('click', function() {
+    if(btnOpenUstensilsSuggestion.parentElement.firstElementChild.value != '') {
+        const suggestions = filterSuggestion(advancedUstensils, btnOpenUstensilsSuggestion.parentElement.firstElementChild.value);
+        openSuggestionsWithEntry(btnOpenUstensilsSuggestion.parentElement.parentElement, suggestionUstensilsDOM, suggestions, 'ustensils');
+    } else {
+        openSuggestions(btnOpenUstensilsSuggestion.parentElement.parentElement, suggestionUstensilsDOM, advancedUstensils, 'ustensils');
+    }
+});
+
+// Gestion evenement btn pour fermer les suggestions 
 btnCloseIngredientSuggestion.addEventListener('click', function() { 
     closeSuggestions(btnCloseIngredientSuggestion.parentElement.parentElement, suggestionIngredientsDOM);
 });

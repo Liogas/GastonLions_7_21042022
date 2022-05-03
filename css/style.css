@@ -236,6 +236,12 @@ div#search_block div#advanced_search_block .advanced_block.open_user_entry {
   padding: 25px 24px 16px 19px;
   height: min-content;
 }
+div#search_block div#advanced_search_block .advanced_block.open_user_entry .open_suggestions {
+  display: none;
+}
+div#search_block div#advanced_search_block .advanced_block.open_user_entry .close_suggestions {
+  display: block;
+}
 div#search_block div#advanced_search_block .advanced_block.open_user_entry .suggestions_block {
   margin-top: 12px;
   margin-left: 1px;
