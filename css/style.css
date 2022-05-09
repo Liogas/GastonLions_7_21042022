@@ -94,8 +94,10 @@ div#search_block div#main_search_block input {
   font-size: 18px;
   width: 100%;
   font-weight: 400;
-  opacity: 0.25;
   line-height: 22px;
+}
+div#search_block div#main_search_block input::placeholder {
+  opacity: 0.25;
 }
 div#search_block div#main_search_block button {
   border: none;

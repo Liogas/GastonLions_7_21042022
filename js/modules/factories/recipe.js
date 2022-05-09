@@ -34,7 +34,11 @@
         ingredients.forEach(function(ingredient) {
             const liIngredient = document.createElement( 'li' );
             liIngredient.className = 'ingredient';
-            liIngredient.innerHTML = `<b>${ingredient.ingredient}</b> : ${ingredient.quantity}`;
+            if(ingredient.quantity) {
+                liIngredient.innerHTML = `<b>${ingredient.ingredient}</b> : ${ingredient.quantity}`;
+            } else {
+                liIngredient.innerHTML = `<b>${ingredient.ingredient}</b>`;
+            }
             ulIngredient.appendChild(liIngredient);
         });
 

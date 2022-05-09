@@ -1,5 +1,6 @@
 import { recipeFactory } from "./modules/factories/recipe.js";
 import { searchFactory } from "./modules/factories/search.js";
+
 const recipes = [
     {
         "id": 1,
@@ -1729,33 +1730,98 @@ const recipes = [
 
 /* DOM CONTENT */ 
 const mainSearchBar = document.getElementById('main_search_bar');
-const tagBlock = document.getElementById('tag_block');
-const resultBlock = document.getElementById('result_block');
+const tagBlock      = document.getElementById('tag_block');
+const resultBlock   = document.getElementById('result_block');
 
 // DOM Elements for ingredient suggestions
-const suggestionIngredientsDOM = document.getElementById('ingredients_suggestions');
-const btnOpenIngredientSuggestion = document.getElementById('open_ingredients_suggestions');
+const suggestionIngredientsDOM     = document.getElementById('ingredients_suggestions');
+const btnOpenIngredientSuggestion  = document.getElementById('open_ingredients_suggestions');
 const btnCloseIngredientSuggestion = document.getElementById('close_ingredients_suggestions');
-const ingredientSearchBarDOM = document.getElementById('ingredients_searchBar');
+const ingredientSearchBarDOM       = document.getElementById('ingredients_searchBar');
 
 // DOM Elements for appliances suggestions
-const suggestionAppliancesDOM = document.getElementById('appliances_suggestions');
-const btnOpenAppliancesSuggestion = document.getElementById('open_appliances_suggestions');
+const suggestionAppliancesDOM      = document.getElementById('appliances_suggestions');
+const btnOpenAppliancesSuggestion  = document.getElementById('open_appliances_suggestions');
 const btnCloseAppliancesSuggestion = document.getElementById('close_appliances_suggestions');
-const applianceSearchBarDOM = document.getElementById('appliances_searchBar');
+const applianceSearchBarDOM        = document.getElementById('appliances_searchBar');
 
 // DOM Elements for ustensils suggestions
-const suggestionUstensilsDOM = document.getElementById('ustensils_suggestions');
-const btnOpenUstensilsSuggestion = document.getElementById('open_ustensils_suggestions');
+const suggestionUstensilsDOM      = document.getElementById('ustensils_suggestions');
+const btnOpenUstensilsSuggestion  = document.getElementById('open_ustensils_suggestions');
 const btnCloseUstensilsSuggestion = document.getElementById('close_ustensils_suggestions');
-const ustensilSearchBarDOM = document.getElementById('ustensils_searchBar');
+const ustensilSearchBarDOM        = document.getElementById('ustensils_searchBar');
 
 // Variables pour le stockage des tags
 let tags = [];
 
+// Variable contenant les recettes filtrée ou non;
+let tabRecipes = recipes;
+
+// Tri des recettes 
+function filterRecipes(value) {
+    tabRecipes = recipes;
+    tabRecipes = tabRecipes.filter(function(recipe) {
+        if(recipe.name.includes(value)) {
+            return true;
+        } 
+        if(recipe.description.includes(value)) {
+            return true;
+        }
+        const testIngredient = recipe.ingredients.find(ingredient => ingredient.ingredient.includes(value));
+        if(testIngredient) {
+            return true;
+        }
+
+        return false;
+    });
+    if(tags.length > 0) {
+        filterWithTags();
+    }
+}
+
+function filterWithTags() {
+    console.log(tabRecipes);
+    console.log(tags);
+    tabRecipes = tabRecipes.filter(function(recipe) {
+        let test = false;
+        tags.forEach(function(tag) {
+            if(tag.type === 'ingredient') {
+                const testIngredient = recipe.ingredients.find(ingredient => ingredient.ingredient.includes(tag.value))
+                console.log(testIngredient);
+                if(testIngredient) {
+                    console.log('okok');
+                    test =  true;
+                };
+            } else if(tag.type === 'appliance') {
+                if(recipe.appliance.includes(tag.value)) {
+                    test = true;
+                }
+            } else if(tag.type === 'ustensil') {
+                    const testUstensil = recipe.ustensils.find(ustensil => ustensil.includes(tag.value));
+                if(testUstensil) {
+                    test = true;
+                }
+            }
+        });
+        return test;
+    });
+}
+
+// Gestion des evenements pour la barre principale
+mainSearchBar.addEventListener('input', function(e) {
+    if(e.target.value.length >= 3) {
+        filterRecipes(e.target.value);
+        displayCardRecipe(resultBlock, tabRecipes);
+    }
+}); 
+
+
+
 function removeTag(tagDOM, value) {
     tagBlock.removeChild(tagDOM);
     tags.splice(tags.indexOf(value), 1);
+    filterRecipes(mainSearchBar.value)
+    displayCardRecipe(resultBlock, tabRecipes);
 }
 function addTag(value, type) {
     const valueTag = {value, type};
@@ -1766,12 +1832,15 @@ function addTag(value, type) {
         removeTag(tag, valueTag);
     });
     tagBlock.appendChild(tag);
+    filterRecipes(mainSearchBar.value)
+    displayCardRecipe(resultBlock, tabRecipes);
 }
 
 // Affiche les recettes
-function displayCardRecipe(contentDOM, dataRecipes) {
+function displayCardRecipe(contentDOM) {
+    resultBlock.innerHTML = '';
     const  { getCardRecipe } = recipeFactory();
-    dataRecipes.forEach((recipe) => {
+    tabRecipes.forEach((recipe) => {
         contentDOM.appendChild(getCardRecipe(recipe));
     });
 }
@@ -1787,12 +1856,12 @@ function displaySuggestions(contentDOM, data, type) {
     });
 }
 // Récupère les valeurs pour les suggestions des différents champs de recherche avancés en évitant les doublons
-function getValueForAdvancedSearch(dataRecipe) {
+function getValueForAdvancedSearch() {
     let valueReturn = [];
     let tabIngredients = [];
     let tabAppliances = [];
     let tabUstensils = [];
-    dataRecipe.forEach((recipe) => {
+    tabRecipes.forEach((recipe) => {
         recipe.ingredients.forEach((ingredient) => {
             if( !tabIngredients.find(element => ingredient.ingredient.toLowerCase() === element.toLowerCase())) {
                 tabIngredients.push(ingredient.ingredient);
@@ -1830,10 +1899,10 @@ function closeSuggestions(parentElement, contentDOM) {
 }
 
 /* Afficher recette */
-displayCardRecipe(resultBlock, recipes);
+displayCardRecipe(resultBlock, tabRecipes);
 
 // Récupérer liste des suggestions pour les champs avancés
-const valueAdvancedSearch = getValueForAdvancedSearch(recipes);
+const valueAdvancedSearch = getValueForAdvancedSearch(tabRecipes);
 const advancedIngredients = valueAdvancedSearch[0];
 const advancedAppliances = valueAdvancedSearch[1];
 const advancedUstensils = valueAdvancedSearch[2];

@@ -16,8 +16,10 @@ div#search_block {
             font-size: $fontSize;
             width: 100%;
             font-weight: 400;
-            opacity: 0.25;
             line-height: 22px;
+            &::placeholder {
+                opacity: .25;
+            }
         }
         button {
             border: none;
