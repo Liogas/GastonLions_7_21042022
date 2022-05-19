@@ -1,5 +1,12 @@
+import {removeTag} from '../tag.js'
+
 export function searchFactory () {
 
+    /**
+     * Generate HTMLElement suggestion
+     * @param {String} value 
+     * @returns {HTMLElement} suggestion
+     */
     function getSuggestionDOM(value) {
         const suggestion     = document.createElement( 'li' );
         suggestion.className = 'suggestion';
@@ -13,9 +20,15 @@ export function searchFactory () {
         return suggestion;
     }
 
-    function getTagDOM(data) {
-        const {value, type} = data;
-
+    /**
+     * Generate HTMLElement tag
+     * @param {String} value 
+     * @param {String} type 
+     * @param {Array} tags 
+     * @param {HTMLElement} contentDOM 
+     * @returns {HTMLElement} tag
+     */
+    function getTagDOM(value, type, tags, contentDOM) {
         const tag      = document.createElement('div');
         tag.className  = `tag tag_${type}`;
 
@@ -23,6 +36,9 @@ export function searchFactory () {
         pTag.innerText = value;
 
         const button   = document.createElement('button');
+        button.addEventListener('click', function() {
+            removeTag(tag, value, tags, contentDOM);
+        });
         
         const img      = document.createElement('img');
         img.src        = './img/cross.png';

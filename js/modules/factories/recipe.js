@@ -1,5 +1,10 @@
  export function recipeFactory (){
 
+    /**
+     * Generate HTMLElement card for recipe
+     * @param {Array} dataCard 
+     * @returns {HTMLElement} article
+     */
     function getCardRecipe(dataCard) {
         const { name, time, ingredients, description} = dataCard;
 
